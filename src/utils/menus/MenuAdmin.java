@@ -1,15 +1,12 @@
-package utils;
+package utils.menus;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import static utils.AdminFunctions.*;
-
-//  1. Consulta de Ficheiros: Imprima o conteúdo do ficheiro na consola (deve permitir ver o conteúdo do ficheiro de Ratings).
-//  2. Total de Ratings: Imprima quantos ratings foram atribuídos, no total.
-//  3. Imprimir Todos os Estúdios: Imprime todos os estúdios já avaliados (sem duplicados).
+import static utils.user.AdminFunctions.*;
+import static utils.user.ClientFunctions.printGraphicCatalog;
 
 // menu with options for the admin user
 public class MenuAdmin {
-    public static void menuAdmin(String[][] matrix) {
+    public static void menuAdmin(String[][] matrix) throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         int option;
 
@@ -18,8 +15,8 @@ public class MenuAdmin {
         do {
             System.out.println("1. Check Rating");
             System.out.println("2. Check Number of Rating Until Now");
+            System.out.println("3. Check Studios");
             System.out.println("0. End Program");
-
             System.out.print("Option: ");
             option = input.nextInt();
 
@@ -34,8 +31,13 @@ public class MenuAdmin {
                     System.out.print("Number of Ratings Until Now: ");
                     System.out.println(totalRatings(matrix));
                     break;
+                case 3:
+                    System.out.println("See all Studios: ");
+                    System.out.print(printAllStudiosWithoutDuplicate(matrix));
+                    break;
                 case 0:
-                    System.out.print("Ending Program");
+                    System.out.println("Ending Program");
+                    System.out.println(printGraphicCatalog("src/resources/IMDV_Copyright.txt"));
                     break;
                 default:
                     System.out.println("Invalid Option");

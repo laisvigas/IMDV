@@ -1,9 +1,9 @@
-package utils;
+package utils.matrixHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import static utils.CountFileLines.countFileLines;
-import static utils.CountFileColumns.countFileColumns;
+import static utils.matrixHandler.CountFileLines.countFileLines;
+import static utils.matrixHandler.CountFileColumns.countFileColumns;
 
 public class FileToMatrix {
     /**
