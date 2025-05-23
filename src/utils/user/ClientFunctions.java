@@ -182,7 +182,7 @@ public class ClientFunctions {
             }
 
             System.out.print("Answer: ");
-            
+
             userAnswer = input.nextInt();
 
             if (currentMatrixAnswer == userAnswer) {

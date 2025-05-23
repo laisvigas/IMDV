@@ -11,9 +11,15 @@ public class MenuClient {
         Scanner input = new Scanner(System.in);
         int option;
 
+        System.out.println("******************************");
+        System.out.println("       IMDV Client Page        ");
+        System.out.println("******************************");
+
         // keep showing options while there isn't a valid one,
         // when is valid, show the result of the chosen option
         do {
+            System.out.println("             MENU             ");
+            System.out.println("******************************");
             System.out.println("1. Register User");
             System.out.println("2. Show Movie Catalog");
             System.out.println("3. Show Graphic Catalog");
@@ -26,21 +32,22 @@ public class MenuClient {
             System.out.println("0. End Program");
             System.out.print("Option: ");
             option = input.nextInt();
-
             System.out.println();
+            System.out.println("******************************\n");
 
             switch (option) {
                 case 1:
-                    System.out.println("REGISTER USER");
+                    System.out.println("REGISTER USER:");
                     registerSimulator();
+                    System.out.println("******************************");
                     break;
                 case 2:
-                    System.out.println("MOVIE CATALOG");
+                    System.out.println("MOVIE CATALOG:");
                     printCatalogMoviesAndRatings(matrix);
+                    System.out.println("******************************");
                     break;
                 case 3:
-                    System.out.println("GRAPHIC CATALOG: ");
-                    System.out.println("MOVIE CATALOG: ");
+                    System.out.println("GRAPHIC CATALOG");
                     System.out.println();
                     System.out.println("Choose which movie poster you want to see: ");
                     System.out.println("1. Harry Potter");
@@ -65,42 +72,48 @@ public class MenuClient {
                             break;
                         default:
                             System.out.println("Invalid choice");
+                            System.out.println("******************************");
                     }
                     break;
                 case 4:
-                    System.out.println("BEST STUDIO");
-                    System.out.println(bestStudio(matrix));
-                    System.out.println();
+                    System.out.print("BEST STUDIO: ");
+                    System.out.println(bestStudio(matrix) + "\n");
+                    System.out.println("******************************");
                     break;
                 case 5:
-                    System.out.println("WORST STUDIO");
-                    System.out.println(worstStudio(matrix));
-                    System.out.println();
+                    System.out.print("WORST STUDIO: ");
+                    System.out.println(worstStudio(matrix) + "\n");
+                    System.out.println("******************************");
                     break;
                 case 6:
-                    System.out.println("LAST CRITIC");
+                    System.out.println("LAST CRITIC: ");
                     System.out.println(lastCritic(matrix));
-                    System.out.println();
+                    System.out.println("******************************\n");
                     break;
                 case 7:
                     System.out.println("QUIZ");
                     quiz(fileToMatrix("src/resources/IMDV_Quiz.csv"));
-                    System.out.println();
+                    System.out.println("******************************\n");
                     break;
                 case 8:
-                    System.out.println("MOVIES BY STUDIO");
+                    System.out.println("MOVIES BY STUDIO: ");
                     searchByStudio(matrix);
+                    System.out.println("******************************");
                     break;
                 case 9:
-                    System.out.println("MOVIES BY GENRE");
+                    System.out.println("MOVIES BY GENRE: ");
                     searchByGenre(matrix);
+                    System.out.println("******************************");
                     break;
                 case 0:
-                    System.out.println("Ending Program");
+                    System.out.println("ENDING PROGRAM");
                     System.out.println(printGraphicCatalog("src/resources/IMDV_Copyright.txt"));
+                    System.out.println();
+                    System.out.println("************************************************************");
                     break;
                 default:
                     System.out.println("Invalid Option");
+                    System.out.println("******************************");
                     break;
             }
         } while (option != 0);

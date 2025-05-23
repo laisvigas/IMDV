@@ -5,9 +5,12 @@ public class AdminFunctions {
     /**
      * Prints the values in the Ratings column (third column) from the given matrix
      */
-    public static void columnRatings(String[][] matrix) {
+    public static void allIMDVinfo(String[][] matrix) {
         for (int line = 0; line < matrix.length; line++) {
-            System.out.println(matrix[line][2]);
+            for (int col = 0; col < matrix[0].length; col++) {
+                System.out.print(matrix[line][col]);
+            }
+            System.out.println(" ");
         }
     }
 

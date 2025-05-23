@@ -10,37 +10,50 @@ public class MenuAdmin {
         Scanner input = new Scanner(System.in);
         int option;
 
+        System.out.println("******************************");
+        System.out.println("       IMDV Admin Page        ");
+        System.out.println("******************************");
         // keep showing options while there isn't a valid one,
         // when is valid, show the result of the chosen option
         do {
-            System.out.println("1. Check Rating");
-            System.out.println("2. Check Number of Rating Until Now");
+            System.out.println("             MENU             ");
+            System.out.println("******************************");
+            System.out.println("1. Check IMDV DB");
+            System.out.println("2. Check number of rating until now");
             System.out.println("3. Check Studios");
             System.out.println("0. End Program");
             System.out.print("Option: ");
             option = input.nextInt();
-
             System.out.println();
+            System.out.println("******************************\n");
 
             switch (option) {
                 case 1:
-                    System.out.println("Checking column ratings: ");
-                    columnRatings(matrix);
+                    System.out.println("IMDV DB:");
+                    allIMDVinfo(matrix);
+                    System.out.println("******************************");
                     break;
                 case 2:
-                    System.out.print("Number of Ratings Until Now: ");
-                    System.out.println(totalRatings(matrix));
+                    System.out.print("NUMBER OF RATINGS UNTIL NOW: " + totalRatings(matrix) + "\n");
+                    System.out.println();
+                    System.out.println("******************************");
                     break;
                 case 3:
-                    System.out.println("See all Studios: ");
+                    System.out.println("ALL STUDIOS:");
                     printAllStudiosWithoutDuplicate(matrix);
+                    System.out.println();
+                    System.out.println("******************************");
                     break;
                 case 0:
-                    System.out.println("Ending Program");
+                    System.out.println("ENDING PROGRAM");
                     System.out.println(printGraphicCatalog("src/resources/IMDV_Copyright.txt"));
+                    System.out.println();
+                    System.out.println("************************************************************");
                     break;
                 default:
                     System.out.println("Invalid Option");
+                    System.out.println();
+                    System.out.println("******************************");
                     break;
             }
         } while (option != 0);

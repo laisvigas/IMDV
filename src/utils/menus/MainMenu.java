@@ -10,12 +10,20 @@ public class MainMenu {
     public static void mainMenu() throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         String userNameCredential = "";
-
         String user;
+
         do {
-            System.out.print("Type of User (ADMIN|CLIENT): ");
+            System.out.println();
+            System.out.println("******************************");
+            System.out.println("       IMDV Login Page        ");
+            System.out.println("******************************");
+            System.out.println();
+            System.out.println("Type of User (ADMIN|CLIENT)");
+            System.out.println("[type END to exit]");
+            System.out.print("");
+            System.out.print("Option: ");
             user = input.next().trim().toUpperCase();
-        } while (!user.equals("ADMIN") && !user.equals("CLIENT"));
+        } while (!user.equals("ADMIN") && !user.equals("CLIENT") && !user.equals("END"));
 
         if (user.equals("ADMIN")) {
             boolean authenticated;
@@ -51,11 +59,17 @@ public class MainMenu {
 
             } while (!authenticated);
 
-            System.out.println("Login successful! Welcome: " + userNameCredential);
+            System.out.println();
+            System.out.println("******************************");
+            System.out.println("LOGIN SUCCESSFUL! WELCOME, " + userNameCredential.toUpperCase());
             menuAdmin(fileToMatrix("src/resources/IMDV.csv"));
-        } else {
-            System.out.println("Login successful!");
+        } else if (user.equals("CLIENT")) {
+            System.out.println();
+            System.out.println("******************************");
+            System.out.println("       LOGIN SUCCESSFUL!      ");
             menuClient(fileToMatrix("src/resources/IMDV.csv"));
+        } else {
+            System.out.println("ENDING PROGRAM");
         }
     }
 }
