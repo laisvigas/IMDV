@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import static utils.matrixHandler.FileToMatrix.fileToMatrix;
+import static utils.menus.MainMenu.mainMenu;
 import static utils.user.ClientFunctions.printCatalogMoviesAndRatings;
 import static utils.user.ClientFunctions.*;
 
@@ -29,6 +30,7 @@ public class MenuClient {
             System.out.println("7. Quiz");
             System.out.println("8. Search Movies by Studio");
             System.out.println("9. Search Movies by Genre");
+            System.out.println("10. Back To Main Menu");
             System.out.println("0. End Program");
             System.out.print("Option: ");
             option = input.nextInt();
@@ -77,12 +79,14 @@ public class MenuClient {
                     break;
                 case 4:
                     System.out.print("BEST STUDIO: ");
-                    System.out.println(bestStudio(matrix) + "\n");
+                    bestStudio(matrix);
+                    System.out.println();
                     System.out.println("******************************");
                     break;
                 case 5:
                     System.out.print("WORST STUDIO: ");
-                    System.out.println(worstStudio(matrix) + "\n");
+                    worstStudio(matrix);
+                    System.out.println();
                     System.out.println("******************************");
                     break;
                 case 6:
@@ -104,6 +108,9 @@ public class MenuClient {
                     System.out.println("MOVIES BY GENRE: ");
                     searchByGenre(matrix);
                     System.out.println("******************************");
+                    break;
+                case 10:
+                    mainMenu();
                     break;
                 case 0:
                     System.out.println("ENDING PROGRAM");

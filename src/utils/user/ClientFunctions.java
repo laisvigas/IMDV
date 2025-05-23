@@ -60,42 +60,108 @@ public class ClientFunctions {
         return "";
     }
 
-    public static String bestStudio(String[][] matrix) {
+    public static void bestStudio(String[][] matrix) {
         /**
-         * Function returns the best studio
+         * Function returns the best studio name and its average based on all rating found
          * @param matrix with all movies
          */
+        String[] studios = new String[matrix.length];
+        double[] ratingsSum = new double[matrix.length];
+        int[] counts = new int[matrix.length];
 
-        float highestRating = Float.parseFloat(matrix[0][2]);
-        String bestStudio = "";
+        int uniqueStudiosCount = 0;
 
-        for (int line = 0; line < matrix.length; line++) {
-                if (Float.parseFloat(matrix[line][2]) > highestRating){
-                    highestRating = Float.parseFloat(matrix[line][2]);
-                    bestStudio = matrix[line][5];
+        for (int i = 0; i < matrix.length; i++) {
+            String currentStudio = matrix[i][5];
+            double currentRating = Double.parseDouble(matrix[i][2]);
+
+            // check if studio is already in the studios array
+            int position = -1;
+            for (int j = 0; j < uniqueStudiosCount; j++) {
+                if (studios[j].equals(currentStudio)) {
+                    position = j;
+                    break;
                 }
-
-        }
-         return bestStudio;
-    }
-
-    public static String worstStudio(String[][] matrix) {
-        /**
-         * Function returns the worst studio
-         * @param matrix with all movies
-         */
-
-        float lowestRating = Float.parseFloat(matrix[0][2]);
-        String worstStudio = "";
-
-        for (int line = 0; line < matrix.length; line++) {
-            if (Float.parseFloat(matrix[line][2]) < lowestRating){
-                lowestRating = Float.parseFloat(matrix[line][2]);
-                worstStudio = matrix[line][5];
             }
 
+            if (position == -1) {
+                // studio not found, add it
+                studios[uniqueStudiosCount] = currentStudio;
+                ratingsSum[uniqueStudiosCount] = currentRating;
+                counts[uniqueStudiosCount] = 1;
+                uniqueStudiosCount++;
+            } else {
+                // studio found, accumulate rating and count
+                ratingsSum[position] += currentRating;
+                counts[position]++;
+            }
         }
-        return worstStudio;
+
+        // find the studio with the highest average rating
+        double highestAverage = 0;
+        String bestStudio = "";
+
+        for (int i = 0; i < uniqueStudiosCount; i++) {
+            double average = ratingsSum[i] / counts[i];
+            if (average > highestAverage) {
+                highestAverage = average;
+                bestStudio = studios[i];
+            }
+        }
+
+        System.out.println(bestStudio + " | " + highestAverage);
+    }
+
+    public static void worstStudio(String[][] matrix) {
+        /**
+         * Function returns the worst studio name and its average based on all rating found
+         * @param matrix with all movies
+         */
+
+        String[] studios = new String[matrix.length];
+        double[] ratingsSum = new double[matrix.length];
+        int[] counts = new int[matrix.length];
+
+        int uniqueStudiosCount = 0;
+
+        for (int i = 0; i < matrix.length; i++) {
+            String currentStudio = matrix[i][5];
+            double currentRating = Double.parseDouble(matrix[i][2]);
+
+            // check if studio is already in the studios array
+            int position = -1;
+            for (int j = 0; j < uniqueStudiosCount; j++) {
+                if (studios[j].equals(currentStudio)) {
+                    position = j;
+                    break;
+                }
+            }
+
+            if (position == -1) {
+                // studio not found, add it
+                studios[uniqueStudiosCount] = currentStudio;
+                ratingsSum[uniqueStudiosCount] = currentRating;
+                counts[uniqueStudiosCount] = 1;
+                uniqueStudiosCount++;
+            } else {
+                // studio found, accumulate rating and count
+                ratingsSum[position] += currentRating;
+                counts[position]++;
+            }
+        }
+
+        // find studio with the lowest average rating, start with a fixed value of 10
+        double lowestAverage = 10;
+        String worstStudio = "";
+
+        for (int i = 0; i < uniqueStudiosCount; i++) {
+            double average = ratingsSum[i] / counts[i];
+            if (average < lowestAverage) {
+                lowestAverage = average;
+                worstStudio = studios[i];
+            }
+        }
+        System.out.println(worstStudio + " | " + lowestAverage);
     }
 
     public static String lastCritic(String[][] matrix) {

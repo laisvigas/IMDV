@@ -13,7 +13,6 @@ public class MainMenu {
         String user;
 
         do {
-            System.out.println();
             System.out.println("******************************");
             System.out.println("       IMDV Login Page        ");
             System.out.println("******************************");

@@ -1,6 +1,10 @@
 package utils.menus;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import static utils.matrixHandler.FileToMatrix.fileToMatrix;
+import static utils.menus.MainMenu.mainMenu;
+import static utils.menus.MenuClient.menuClient;
 import static utils.user.AdminFunctions.*;
 import static utils.user.ClientFunctions.printGraphicCatalog;
 
@@ -21,6 +25,7 @@ public class MenuAdmin {
             System.out.println("1. Check IMDV DB");
             System.out.println("2. Check number of rating until now");
             System.out.println("3. Check Studios");
+            System.out.println("4. Back to Main Menu");
             System.out.println("0. End Program");
             System.out.print("Option: ");
             option = input.nextInt();
@@ -43,6 +48,9 @@ public class MenuAdmin {
                     printAllStudiosWithoutDuplicate(matrix);
                     System.out.println();
                     System.out.println("******************************");
+                    break;
+                case 4:
+                    mainMenu();
                     break;
                 case 0:
                     System.out.println("ENDING PROGRAM");
