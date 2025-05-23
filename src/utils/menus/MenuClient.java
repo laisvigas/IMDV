@@ -2,7 +2,7 @@ package utils.menus;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import static utils.user.AdminFunctions.totalRatings;
+import static utils.matrixHandler.FileToMatrix.fileToMatrix;
 import static utils.user.ClientFunctions.printCatalogMoviesAndRatings;
 import static utils.user.ClientFunctions.*;
 
@@ -21,6 +21,8 @@ public class MenuClient {
             System.out.println("5. Show Worst Studio");
             System.out.println("6. Last Critic");
             System.out.println("7. Quiz");
+            System.out.println("8. Search Movies by Studio");
+            System.out.println("9. Search Movies by Genre");
             System.out.println("0. End Program");
             System.out.print("Option: ");
             option = input.nextInt();
@@ -81,13 +83,17 @@ public class MenuClient {
                     System.out.println();
                     break;
                 case 7:
-                    System.out.print("QUIZ");
+                    System.out.println("QUIZ");
+                    quiz(fileToMatrix("src/resources/IMDV_Quiz.csv"));
+                    System.out.println();
                     break;
                 case 8:
-                    System.out.print("todo");
+                    System.out.println("MOVIES BY STUDIO");
+                    searchByStudio(matrix);
                     break;
                 case 9:
-                    System.out.print("todo");
+                    System.out.println("MOVIES BY GENRE");
+                    searchByGenre(matrix);
                     break;
                 case 0:
                     System.out.println("Ending Program");

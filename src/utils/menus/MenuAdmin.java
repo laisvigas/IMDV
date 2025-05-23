@@ -33,7 +33,7 @@ public class MenuAdmin {
                     break;
                 case 3:
                     System.out.println("See all Studios: ");
-                    System.out.print(printAllStudiosWithoutDuplicate(matrix));
+                    printAllStudiosWithoutDuplicate(matrix);
                     break;
                 case 0:
                     System.out.println("Ending Program");

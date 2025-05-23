@@ -1,6 +1,7 @@
 package utils.user;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ClientFunctions {
@@ -20,7 +21,7 @@ public class ClientFunctions {
         System.out.println("User sucessfully registered: " + name + " | " + contact + " | " + email);
     }
 
-    public static String printCatalogMoviesAndRatings(String[][] matrix) {
+    public static void printCatalogMoviesAndRatings(String[][] matrix) {
         String[] movies = new String[matrix.length];
         String[] ratings = new String[matrix.length];
         int uniqueCount = 0;
@@ -46,7 +47,6 @@ public class ClientFunctions {
                 System.out.println(movieMatrix + " | " + ratingMatrix);
             }
         }
-        return "";
     }
 
     public static String printGraphicCatalog(String filePath) throws FileNotFoundException {
@@ -103,4 +103,99 @@ public class ClientFunctions {
         return (String.join(" | c", lastLine));
     }
 
+    public static void searchByStudio(String[][] matrix) {
+        /**
+         * Function that searches movies by studio and prints the title and genre
+         * @param matrix with all movies
+         */
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the Studio Name: ");
+        String studioToBeSearched = input.nextLine().trim().toLowerCase();
+
+        boolean found = false;
+
+        System.out.println("\n---------------------------------------------------------------");
+        System.out.println("Results for studio: " + studioToBeSearched.toUpperCase());
+        System.out.println("---------------------------------------------------------------");
+        System.out.printf("%-50s | %-15s\n", "Movies", "Genre");
+        System.out.println("---------------------------------------------------------------");
+
+        for (int line = 0; line < matrix.length; line++) {
+            if (matrix[line][5].equalsIgnoreCase(studioToBeSearched)) {
+                System.out.printf("%-50s | %-15s\n", matrix[line][1], matrix[line][7]);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No movies found for this studio.");
+        }
+
+        System.out.println("---------------------------------------------------------------\n");
+    }
+
+    public static void searchByGenre(String[][] matrix) {
+        /**
+         * Function that searches movies by studio and prints the title and genre
+         * @param matrix with all movies
+         */
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the Genre: ");
+        String genreToBeSearched = input.nextLine().trim().toLowerCase();
+
+        boolean found = false;
+
+        System.out.println("\n---------------------------------------------------------------");
+        System.out.println("Results for genre: " + genreToBeSearched.toUpperCase());
+        System.out.println("---------------------------------------------------------------");
+        System.out.printf("%-30s | %-15s\n", "Studios", "Movies");
+        System.out.println("---------------------------------------------------------------");
+
+        for (int line = 0; line < matrix.length; line++) {
+            if (matrix[line][7].equalsIgnoreCase(genreToBeSearched)) {
+                System.out.printf("%-30s | %-15s\n", matrix[line][5], matrix[line][1]);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No movies found for this genre.");
+        }
+
+        System.out.println("---------------------------------------------------------------\n");
+    }
+
+    public static void quiz (String[][] matrix) {
+        Scanner input = new Scanner(System.in);
+        int currentMatrixAnswer = 0;
+        int userAnswer;
+        int points = 0;
+
+        for (int line = 0; line < matrix.length; line++) {
+            for (int col = 0; col < matrix[0].length; col++) {
+                if (col == 0) {
+                    System.out.println(matrix[line][col]);
+                } else if (col < matrix.length) {
+                    System.out.println(col + "." + matrix[line][col]);
+                }
+                currentMatrixAnswer = Integer.parseInt(matrix[line][matrix.length]);
+            }
+
+            System.out.print("Answer: ");
+            
+            userAnswer = input.nextInt();
+
+            if (currentMatrixAnswer == userAnswer) {
+                System.out.println("Right Answer!");
+                System.out.println();
+                points++;
+            } else{
+                System.out.println("Wrong Answer!");
+                System.out.println();
+            }
+        }
+        System.out.println("End of Quiz");
+        System.out.println("Total Points: " + points);
+        System.out.println();
+    }
 }

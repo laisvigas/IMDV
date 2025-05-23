@@ -26,7 +26,7 @@ public class AdminFunctions {
      * Prints all unique studio names found in the given matrix
      * @return An empty string ""
      */
-    public static String printAllStudiosWithoutDuplicate(String[][] matrix) {
+    public static void printAllStudiosWithoutDuplicate(String[][] matrix) {
         String[] studios = new String[matrix.length];
         int uniqueCount = 0;
 
@@ -49,6 +49,5 @@ public class AdminFunctions {
                 System.out.println(studioMatrix);
             }
         }
-        return "";
     }
 }
