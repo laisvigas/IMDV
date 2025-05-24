@@ -1,6 +1,10 @@
-# PRACTICAL PROJECT
+# IMDV
 
-## Objectives
+A platform for analyzing, searching, and managing film reviews.
+
+## PRACTICAL PROJECT
+
+### Objectives
 
 - Develop a program that fulfills the prerequisites listed in the assignment description.
 - Each task must build upon the previous one with the appropriate modifications.
@@ -14,7 +18,7 @@
 
 ---
 
-## Getting Started
+### Getting Started
 
 After completing your Software Developer course, you were contacted by the renowned film review company IMDV©.  
 This company reviews films so users can browse their platform and discover the best and worst films of all time.  
@@ -49,7 +53,7 @@ Once an option is selected, the menu must repeat until the user selects the exit
 
 ---
 
-### ADMIN MENU
+#### ADMIN MENU
 
 1. **View Files**: Display the content of the Ratings file in the console.
 2. **Total Ratings**: Print the total number of ratings assigned.
@@ -57,7 +61,7 @@ Once an option is selected, the menu must repeat until the user selects the exit
 
 ---
 
-### CLIENT MENU
+#### CLIENT MENU
 
 1. **New Registration**: Simulate registering a new platform user (using variables and Scanner).  
    Ask the user for their information (username, contact, email) and then display a success message:
