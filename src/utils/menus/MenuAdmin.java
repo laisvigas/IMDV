@@ -14,7 +14,7 @@ public class MenuAdmin {
      * @param matrix loaded from a .csv file
      * @throws FileNotFoundException if the specified file does not exist
      */
-    public static void menuAdmin(String[][] matrix) throws FileNotFoundException {
+    public static String menuAdmin(String[][] matrix) throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         int option;
 
@@ -63,16 +63,9 @@ public class MenuAdmin {
                     System.out.println("******************************");
                     break;
                 case 4:
-                    mainMenu();
-                    break;
+                    return "BACK";
                 case 0:
-                    System.out.println("ENDING PROGRAM");
-                    printGraphicCatalog("src/resources/IMDV_Copyright.txt");
-                    System.out.println();
-                    System.out.println("************************************************************");
-                    // end program
-                    System.exit(0);
-                    break;
+                    return "EXIT";
                 default:
                     System.out.println("Invalid Option");
                     System.out.println();
