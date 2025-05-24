@@ -5,24 +5,87 @@ import java.util.Scanner;
 
 public class ClientFunctions {
     /**
+     * Checks if the name passed as an argument is invalid.
+     * The name is invalid if null, empty, or if it contains numbers
+     * @param name the input name to validate
+     * @return true if the name is invalid; false if it's not
+     */
+    public static boolean isInvalidName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            // return true for invalid cases
+            return true;
+        }
+        // returns true if contains number
+        return name.matches(".*\\d.*");
+    }
+
+    /**
+     * Checks if the contact passed as an argument is invalid.
+     * The contact is invalid if null, empty, or if it contains letters
+     * @param contact the input name to validate
+     * @return true if the contact is invalid; false if it's not
+     */
+    public static boolean isInvalidContact(String contact) {
+        if (contact == null || contact.trim().isEmpty()) {
+            // return true for invalid cases
+            return true;
+        }
+        // returns true if contains letters
+        return !contact.matches("^[0-9]+$");
+    }
+
+    /**
+     * Checks if the email passed as an argument is invalid.
+     * The email is invalid if null, empty, or if it's not following the regex
+     * @param email the input name to validate
+     * @return true if the email is invalid; false if it's not
+     */
+    public static boolean isInvalidEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            return true;
+        }
+        // returns true if invalid
+        return !email.matches("^(?i)[\\w.-]+@([\\w-]+\\.)+[A-Za-z]{2,6}$");
+    }
+
+    /**
      * Simulates user registration by asking user input.
-     * Prompts the user to enter their name, contact, and email.
-     * After receiving the input, it prints a confirmation message with the entered data.
+     * Prompts the user to enter their name, contact, and email and validate it though functions.
+     * After receiving the input and if the inputs are valid, it prints a confirmation message with the entered data.
      * This function does not perform any validation or store the data.
      */
     public static void registerSimulator() {
         Scanner input = new Scanner(System.in);
+        String name, contact, email;
 
-        System.out.print("Enter Name: ");
-        String name = input.nextLine();
+        // validating name
+        do {
+            System.out.print("Enter Name: ");
+            name = input.nextLine().trim();
+            if (isInvalidName(name)) {
+                System.out.println(">>>Oooops, invalid name!\n>>>Names should contain only letters.");
+            }
+        } while (isInvalidName(name));
 
-        System.out.print("Enter Contact: ");
-        String contact = input.nextLine();
+        // validating contact
+        do {
+            System.out.print("Enter Contact: ");
+            // passed as a string because how it's handled in the validateContact function
+            contact = input.nextLine().trim();
+            if (isInvalidContact(contact)) {
+                System.out.println(">>>Oooops, invalid contact!\n>>>Contacts should contain only numbers.");
+            }
+        } while (isInvalidContact(contact));
 
-        System.out.print("Enter Email: ");
-        String email = input.nextLine();
+        do {
+            System.out.print("Enter Email: ");
+            email = input.nextLine().trim().toLowerCase();
+            if (isInvalidEmail(email)) {
+                System.out.println(">>>Oooops, invalid email!\n>>>Please enter a valid email address.");
+            }
+        } while (isInvalidEmail(email));
 
-        System.out.println("User sucessfully registered: " + name + " | " + contact + " | " + email);
+        System.out.println("User successfully registered: " + name + " | " + contact + " | " + email);
     }
 
     /**
@@ -34,7 +97,6 @@ public class ClientFunctions {
      */
     public static void printCatalogMoviesAndRatings(String[][] matrix) {
         String[] movies = new String[matrix.length];
-        String[] ratings = new String[matrix.length];
         int uniqueCount = 0;
 
         for (int i = 0; i < matrix.length; i++) {
@@ -53,7 +115,6 @@ public class ClientFunctions {
             // if it's not in the array yet, add it to the array and print it
             if (!alreadyExists) {
                 movies[uniqueCount] = movieMatrix;
-                ratings[uniqueCount] = ratingMatrix;
                 uniqueCount++;
                 System.out.println(movieMatrix + " | " + ratingMatrix);
             }
@@ -250,7 +311,8 @@ public class ClientFunctions {
     public static void quiz (String[][] matrix) {
         Scanner input = new Scanner(System.in);
         int currentMatrixAnswer = 0;
-        int userAnswer;
+        String userAnswer;
+        int userAnswerInt;
         int points = 0;
 
         for (int line = 0; line < matrix.length; line++) {
@@ -267,23 +329,32 @@ public class ClientFunctions {
                 currentMatrixAnswer = Integer.parseInt(matrix[line][matrix.length]);
             }
 
-            // prompt the user for an answer passed as an int
-            System.out.print("Answer: ");
+            // enter a loop to resolve invalid inputs
+            boolean validInput = false;
+            do {
+                System.out.print("Answer: ");
+                userAnswer = input.nextLine();
 
-            userAnswer = input.nextInt();
+                try {
+                    userAnswerInt = Integer.parseInt(userAnswer);
 
-            if (currentMatrixAnswer == userAnswer) {
-                System.out.println("Right Answer!");
-                System.out.println();
-                // stores one point for every right answer
-                points++;
-            } else {
-                // shows user that they choose the wrong answer and show the right answer
-                System.out.println("Wrong Answer! The correct was number: " + currentMatrixAnswer);
-                System.out.println();
-            }
+                    if (userAnswerInt >= 1 && userAnswerInt <= 4) {
+                        validInput = true;
+
+                        if (currentMatrixAnswer == userAnswerInt) {
+                            System.out.println("Right Answer!\n");
+                            points++;
+                        } else {
+                            System.out.println("Wrong Answer! The correct was number: " + currentMatrixAnswer + "\n");
+                        }
+                    } else {
+                        System.out.println("Please enter a number between 1 and 4 only.\n");
+                    }
+                } catch (NumberFormatException exception) {
+                    System.out.println("Ooops! You entered a text, please enter a number between 1 and 4.\n");
+                }
+            } while (!validInput);
         }
-        System.out.println("END OF QUIZ | Total Points: " + points);
-        System.out.println();
+        System.out.println("END OF QUIZ | Total Points: " + points + "\n");
     }
 }

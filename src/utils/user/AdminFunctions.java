@@ -1,5 +1,4 @@
 package utils.user;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -10,7 +9,8 @@ public class AdminFunctions {
      * Prints all information contained in the IMDV matrix.
      * This function iterates through each cell of the matrix and prints all its contents.
      * Each line of the matrix is printed on a new line.
-     * @param matrix representing the IMDV database
+     * @param pathToFile the path to the CSV file containing the IMDV database
+     * @throws FileNotFoundException if the specified file does not exist
      */
     public static void allIMDVinfo(String pathToFile) throws FileNotFoundException {
         File file = new File(pathToFile);

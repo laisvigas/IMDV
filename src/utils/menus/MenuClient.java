@@ -1,8 +1,8 @@
 package utils.menus;
+import javax.crypto.spec.PSource;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import static utils.matrixHandler.FileToMatrix.fileToMatrix;
-import static utils.menus.MainMenu.mainMenu;
 import static utils.user.ClientFunctions.*;
 
 // menu with options for the client user
@@ -13,6 +13,7 @@ public class MenuClient {
      * The menu keeps running until the user chooses to end the program.
      * @param matrix loaded from a .csv file
      * @throws FileNotFoundException if the specified file does not exist
+     * @return "BACK" if the user chooses to return to the main menu, or "EXIT" if the user chooses to end the program
      */
     public static String menuClient(String[][] matrix) throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
@@ -59,13 +60,20 @@ public class MenuClient {
                     System.out.println("******************************");
                     break;
                 case 2:
+                    System.out.println("******************************");
+                    System.out.println();
                     System.out.println("MOVIE CATALOG | MOVIES AND RATINGS:");
+                    System.out.println();
+                    System.out.println("******************************");
                     printCatalogMoviesAndRatings(matrix);
                     System.out.println("******************************");
                     break;
                 case 3:
                     // user will be able to choose an image from this sub-menu
+                    System.out.println();
+                    System.out.println("******************************");
                     System.out.println("GRAPHIC CATALOG");
+                    System.out.println("******************************");
                     System.out.println();
                     System.out.println("Choose which movie poster you want to see: ");
                     System.out.println("1. Harry Potter");
@@ -96,18 +104,23 @@ public class MenuClient {
                     }
                     break;
                 case 4:
+                    System.out.println("******************************");
+                    System.out.println();
                     System.out.print("BEST STUDIO: ");
                     studioRatingsBestWorst(matrix, "best");
                     System.out.println();
                     System.out.println("******************************");
                     break;
                 case 5:
+                    System.out.println("******************************");
+                    System.out.println();
                     System.out.print("WORST STUDIO: ");
                     studioRatingsBestWorst(matrix, "worst");
                     System.out.println();
                     System.out.println("******************************");
                     break;
                 case 6:
+                    System.out.println("******************************");
                     System.out.println();
                     System.out.println("LAST CRITIC: ");
                     System.out.println(lastCritic(matrix));
@@ -115,13 +128,18 @@ public class MenuClient {
                     System.out.println("******************************\n");
                     break;
                 case 7:
+                    System.out.println("******************************");
+                    System.out.println();
                     System.out.println("MOVIE QUIZ!");
                     System.out.println();
                     quiz(fileToMatrix("src/resources/IMDV_Quiz.csv"));
                     System.out.println("******************************\n");
                     break;
                 case 8:
+                    System.out.println();
+                    System.out.println("******************************");
                     System.out.println("MOVIES BY STUDIO: ");
+                    System.out.println();
                     searchByStudio(matrix);
                     System.out.println("******************************");
                     break;

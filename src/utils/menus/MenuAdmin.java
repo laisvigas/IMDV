@@ -1,9 +1,7 @@
 package utils.menus;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import static utils.menus.MainMenu.mainMenu;
 import static utils.user.AdminFunctions.*;
-import static utils.user.ClientFunctions.printGraphicCatalog;
 
 // menu with options for the admin user
 public class MenuAdmin {
@@ -13,6 +11,7 @@ public class MenuAdmin {
      * The menu continues to display until the user chooses to exit the program.
      * @param matrix loaded from a .csv file
      * @throws FileNotFoundException if the specified file does not exist
+     * @return "BACK" if the user chooses to return to the main menu, or "EXIT" if the user opts to end the program
      */
     public static String menuAdmin(String[][] matrix) throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
@@ -33,6 +32,8 @@ public class MenuAdmin {
             System.out.println("0. End Program");
             System.out.print("Option: ");
             String userInput = input.nextLine();
+            System.out.println("******************************");
+            System.out.println();
 
             try {
                 // convert user input to int
