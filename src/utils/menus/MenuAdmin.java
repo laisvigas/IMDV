@@ -1,15 +1,19 @@
 package utils.menus;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-import static utils.matrixHandler.FileToMatrix.fileToMatrix;
 import static utils.menus.MainMenu.mainMenu;
-import static utils.menus.MenuClient.menuClient;
 import static utils.user.AdminFunctions.*;
 import static utils.user.ClientFunctions.printGraphicCatalog;
 
 // menu with options for the admin user
 public class MenuAdmin {
+    /**
+     * Displays the admin menu, processes user input, and calls the appropriate
+     * admin functions based on the selected option.
+     * The menu continues to display until the user chooses to exit the program.
+     * @param matrix loaded from a .csv file
+     * @throws FileNotFoundException if the specified file does not exist
+     */
     public static void menuAdmin(String[][] matrix) throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         int option;
@@ -28,14 +32,23 @@ public class MenuAdmin {
             System.out.println("4. Back to Main Menu");
             System.out.println("0. End Program");
             System.out.print("Option: ");
-            option = input.nextInt();
-            System.out.println();
-            System.out.println("******************************\n");
+            String userInput = input.nextLine();
+
+            try {
+                // convert user input to int
+                option = Integer.parseInt(userInput);
+            } catch (NumberFormatException exception) {
+                System.out.println("******************************\n");
+                System.out.println("Invalid input! Please enter a valid number.\n");
+                System.out.println("******************************");
+                // back to the beginning of the loop
+                continue;
+            }
 
             switch (option) {
                 case 1:
                     System.out.println("IMDV DB:");
-                    allIMDVinfo(matrix);
+                    allIMDVinfo("src/resources/IMDV.csv");
                     System.out.println("******************************");
                     break;
                 case 2:
@@ -54,9 +67,11 @@ public class MenuAdmin {
                     break;
                 case 0:
                     System.out.println("ENDING PROGRAM");
-                    System.out.println(printGraphicCatalog("src/resources/IMDV_Copyright.txt"));
+                    printGraphicCatalog("src/resources/IMDV_Copyright.txt");
                     System.out.println();
                     System.out.println("************************************************************");
+                    // end program
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid Option");
@@ -64,6 +79,6 @@ public class MenuAdmin {
                     System.out.println("******************************");
                     break;
             }
-        } while (option != 0);
+        } while (true);
     }
 }

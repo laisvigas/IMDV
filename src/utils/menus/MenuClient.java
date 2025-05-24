@@ -1,13 +1,19 @@
 package utils.menus;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import static utils.matrixHandler.FileToMatrix.fileToMatrix;
 import static utils.menus.MainMenu.mainMenu;
-import static utils.user.ClientFunctions.printCatalogMoviesAndRatings;
 import static utils.user.ClientFunctions.*;
 
+// menu with options for the client user
 public class MenuClient {
+    /**
+     * Displays the client menu, processes user input, and calls the appropriate
+     * client functions based on the selected option.
+     * The menu keeps running until the user chooses to end the program.
+     * @param matrix loaded from a .csv file
+     * @throws FileNotFoundException if the specified file does not exist
+     */
     public static void menuClient(String[][] matrix) throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         int option;
@@ -17,7 +23,7 @@ public class MenuClient {
         System.out.println("******************************");
 
         // keep showing options while there isn't a valid one,
-        // when is valid, show the result of the chosen option
+        // when is valid, show the result of the chosen option or exit if it's 0
         do {
             System.out.println("             MENU             ");
             System.out.println("******************************");
@@ -33,9 +39,18 @@ public class MenuClient {
             System.out.println("10. Back To Main Menu");
             System.out.println("0. End Program");
             System.out.print("Option: ");
-            option = input.nextInt();
-            System.out.println();
-            System.out.println("******************************\n");
+            String userInput = input.nextLine();
+
+            try {
+                // convert user input to int
+                option = Integer.parseInt(userInput);
+            } catch (NumberFormatException exception) {
+                System.out.println("******************************\n");
+                System.out.println("Invalid input! Please enter a valid number.\n");
+                System.out.println("******************************");
+                // back to the beginning of the loop
+                continue;
+            }
 
             switch (option) {
                 case 1:
@@ -44,11 +59,12 @@ public class MenuClient {
                     System.out.println("******************************");
                     break;
                 case 2:
-                    System.out.println("MOVIE CATALOG:");
+                    System.out.println("MOVIE CATALOG | MOVIES AND RATINGS:");
                     printCatalogMoviesAndRatings(matrix);
                     System.out.println("******************************");
                     break;
                 case 3:
+                    // user will be able to choose an image from this sub-menu
                     System.out.println("GRAPHIC CATALOG");
                     System.out.println();
                     System.out.println("Choose which movie poster you want to see: ");
@@ -58,19 +74,21 @@ public class MenuClient {
                     System.out.println("4. Star Wars");
                     System.out.print("Enter Choice: ");
                     int chosenCatalog = input.nextInt();
+                    input.nextLine();
 
+                    // prints image based on the user choice
                     switch (chosenCatalog) {
                         case 1:
-                            System.out.println(printGraphicCatalog("src/resources/CatalogoGrafico/HarryPotter.txt"));
+                            printGraphicCatalog("src/resources/CatalogoGrafico/HarryPotter.txt");
                             break;
                         case 2:
-                            System.out.println(printGraphicCatalog("src/resources/CatalogoGrafico/Interstellar.txt"));
+                            printGraphicCatalog("src/resources/CatalogoGrafico/Interstellar.txt");
                             break;
                         case 3:
-                            System.out.println(printGraphicCatalog("src/resources/CatalogoGrafico/LordOfTheRings.txt"));
+                            printGraphicCatalog("src/resources/CatalogoGrafico/LordOfTheRings.txt");
                             break;
                         case 4:
-                            System.out.println(printGraphicCatalog("src/resources/CatalogoGrafico/StarWars.txt"));
+                            printGraphicCatalog("src/resources/CatalogoGrafico/StarWars.txt");
                             break;
                         default:
                             System.out.println("Invalid choice");
@@ -79,23 +97,26 @@ public class MenuClient {
                     break;
                 case 4:
                     System.out.print("BEST STUDIO: ");
-                    bestStudio(matrix);
+                    studioRatingsBestWorst(matrix, "best");
                     System.out.println();
                     System.out.println("******************************");
                     break;
                 case 5:
                     System.out.print("WORST STUDIO: ");
-                    worstStudio(matrix);
+                    studioRatingsBestWorst(matrix, "worst");
                     System.out.println();
                     System.out.println("******************************");
                     break;
                 case 6:
+                    System.out.println();
                     System.out.println("LAST CRITIC: ");
                     System.out.println(lastCritic(matrix));
+                    System.out.println();
                     System.out.println("******************************\n");
                     break;
                 case 7:
-                    System.out.println("QUIZ");
+                    System.out.println("MOVIE QUIZ!");
+                    System.out.println();
                     quiz(fileToMatrix("src/resources/IMDV_Quiz.csv"));
                     System.out.println("******************************\n");
                     break;
@@ -114,15 +135,17 @@ public class MenuClient {
                     break;
                 case 0:
                     System.out.println("ENDING PROGRAM");
-                    System.out.println(printGraphicCatalog("src/resources/IMDV_Copyright.txt"));
+                    printGraphicCatalog("src/resources/IMDV_Copyright.txt");
                     System.out.println();
                     System.out.println("************************************************************");
+                    // end program
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid Option");
                     System.out.println("******************************");
                     break;
             }
-        } while (option != 0);
+        } while (true);
     }
 }

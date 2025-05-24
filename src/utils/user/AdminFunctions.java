@@ -1,21 +1,36 @@
 package utils.user;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 // functions related to admin user
 public class AdminFunctions {
     /**
-     * Prints the values in the Ratings column (third column) from the given matrix
+     * Prints all information contained in the IMDV matrix.
+     * This function iterates through each cell of the matrix and prints all its contents.
+     * Each line of the matrix is printed on a new line.
+     * @param matrix representing the IMDV database
      */
-    public static void allIMDVinfo(String[][] matrix) {
-        for (int line = 0; line < matrix.length; line++) {
-            for (int col = 0; col < matrix[0].length; col++) {
-                System.out.print(matrix[line][col]);
-            }
-            System.out.println(" ");
+    public static void allIMDVinfo(String pathToFile) throws FileNotFoundException {
+        File file = new File(pathToFile);
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            // replace ; for |
+            String formattedLine = line.replace(";", " | ");
+            System.out.println(formattedLine);
         }
+
+        sc.close();
     }
 
     /**
-     * Counts the values in the Ratings column (third column) from the given matrix
+     * Calculates the total number of ratings in the IMDV matrix
+     * assuming each row represents a unique rating entry.
+     * @param matrix representing the IMDV database
+     * @return the total number of rows, interpreted as the total number of ratings
      */
     public static int totalRatings(String[][] matrix) {
         int countRatings = 0;
@@ -26,8 +41,10 @@ public class AdminFunctions {
     }
 
     /**
-     * Prints all unique studio names found in the given matrix
-     * @return An empty string ""
+     * Prints all unique studio names from the IMDV matrix.
+     * The function iterates through the 5th index of the matrix and prints each studio name once
+     * A temporary array is used to track and compare previously found studios.
+     * @param matrix representing the IMDV database
      */
     public static void printAllStudiosWithoutDuplicate(String[][] matrix) {
         String[] studios = new String[matrix.length];

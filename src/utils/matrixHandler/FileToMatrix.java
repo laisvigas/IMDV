@@ -7,9 +7,10 @@ import static utils.matrixHandler.CountFileColumns.countFileColumns;
 
 public class FileToMatrix {
     /**
-     * Function that loads the content of a file into a matrix
+     * Function that loads the content of a .csv file into a matrix
+     * @param filePath the path to the file whose lines and columns will be populated into a matrix
      * @return String[][] matrix with the file content
-     * @throws FileNotFoundException if file isn't found
+     * @throws FileNotFoundException if the specified file does not exist
      */
     public static String[][] fileToMatrix(String filePath) throws FileNotFoundException {
 
