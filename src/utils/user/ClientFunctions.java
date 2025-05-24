@@ -56,7 +56,7 @@ public class ClientFunctions {
      */
     public static void registerSimulator() {
         Scanner input = new Scanner(System.in);
-        String name, contact, email;
+        String name, contact, contactNoWhiteSpaces, email;
 
         // validating name
         do {
@@ -72,10 +72,11 @@ public class ClientFunctions {
             System.out.print("Enter Contact: ");
             // passed as a string because how it's handled in the validateContact function
             contact = input.nextLine().trim();
-            if (isInvalidContact(contact)) {
+            contactNoWhiteSpaces = contact.replaceAll("\\s+", "");
+            if (isInvalidContact(contactNoWhiteSpaces)) {
                 System.out.println(">>>Oooops, invalid contact!\n>>>Contacts should contain only numbers.");
             }
-        } while (isInvalidContact(contact));
+        } while (isInvalidContact(contactNoWhiteSpaces));
 
         do {
             System.out.print("Enter Email: ");
@@ -85,7 +86,7 @@ public class ClientFunctions {
             }
         } while (isInvalidEmail(email));
 
-        System.out.println("User successfully registered: " + name + " | " + contact + " | " + email);
+        System.out.println("User successfully registered: " + name + " | " + contactNoWhiteSpaces + " | " + email);
     }
 
     /**
